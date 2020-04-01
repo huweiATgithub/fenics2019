@@ -2,8 +2,6 @@ version: '3'
 services:
   jupyter:
     image: dolfinx/lab
-    ports:
-      - "8888:8888"
       
   nginx:
     image: nginx:1.15-alpine
