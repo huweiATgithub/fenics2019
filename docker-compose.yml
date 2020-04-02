@@ -4,7 +4,10 @@ services:
     image: dolfinx/lab
     volumes:
       - ./data/jupyter:/root/shared
-    command: "--NotebookApp.password=sha1:379d431d4559:b3171db6ac420a5558b31facb381b37f30a96a86"
+    environment:
+      - SHELL=/bin/bash
+      - ACCESS_TOKEN
+    command: "--NotebookApp.password=$ACCESS_TOKEN"
       
   nginx:
     image: nginx:1.15-alpine
