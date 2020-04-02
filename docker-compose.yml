@@ -6,7 +6,8 @@ services:
       - ./data/jupyter:/root/shared
     environment:
       - SHELL=/bin/bash
-      - ACCESS_TOKEN
+    env_file:
+      - .env
     command: "--NotebookApp.password=$ACCESS_TOKEN"
       
   nginx:
