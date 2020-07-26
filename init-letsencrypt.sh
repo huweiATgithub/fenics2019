@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(aws.52tts.me)
+domains=(aws.huwei-math.top)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="522289031@qq.com" # Adding a valid address is strongly recommended
