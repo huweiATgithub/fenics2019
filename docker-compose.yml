@@ -1,6 +1,6 @@
 version: '3'
 services:
-  jupyter:
+  fem:
     image: quay.io/fenicsproject/stable
     volumes:
       - ./data/jupyter:/home/fenics/shared
@@ -8,7 +8,8 @@ services:
       - SHELL=/bin/bash
     env_file:
       - .env
-    command: "/bin/sh -c 'jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser --NotebookApp.password=$ACCESS_TOKEN'"
+    entrypoint: ["/sbin/my_init", "--"]
+    command: "jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser --NotebookApp.password=$ACCESS_TOKEN"
       
   nginx:
     image: nginx:1.15-alpine
@@ -20,7 +21,7 @@ services:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
     depends_on:
-      - jupyter
+      - fem
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     
   certbot:
